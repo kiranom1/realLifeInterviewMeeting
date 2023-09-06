@@ -9,3 +9,8 @@ CREATE TABLE tblCarTravelDistance (
 
 INSERT INTO tblCarTravelDistance VALUES
     ('Creta', 'Day1', 50);
+
+INSERT INTO tblCarTravelDistance VALUES
+      ('Creta', 'Day2', 100)
+    , ('Creta', 'Day3', 200)
+    ;
