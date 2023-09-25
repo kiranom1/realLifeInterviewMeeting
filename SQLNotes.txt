@@ -1,0 +1,472 @@
+
+--PostgreSQL
+Postgresql elephant.svg
+The World's Most Advanced Open Source Relational Database[1]
+Developer(s)	PostgreSQL Global Development Group[2]
+Initial release	8 July 1996;
+26 years ago[3]
+Stable release	
+15.2[4] Edit this on Wikidata / 9 February 2023; 24 days ago
+Repository	
+git.postgresql.org/gitweb/?p=postgresql.git Edit this at Wikidata
+Written in	C
+Operating system	Linux, 64-bit macOS (incl. ARM), (64-bit) Windows,[5] FreeBSD, OpenBSD
+Type	RDBMS
+License	PostgreSQL License (free and open-source, permissive)[6][7][8]
+Website	www.postgresql.org
+
+Post installation:
+C:\Program Files\PostgreSQL\14\bin\
+
+Errors post-installation:
+psql: error: connection to server at "localhost" (::1), port 5432 failed: FATAL: password authentication failed for user "Administrator"
+
+--
+CREATE TABLE tblEmployee
+(
+empId int(10),
+name varchar(45)
+)
+;
+
+--Deleting the table
+DROP TABLE tblEmployee
+;
+
+--https://www.postgresql.org/docs/current/datatype.html
+
+CREATE TABLE tblEmployee (
+  id SERIAL	--autoincrementing integer
+, name character varying(50)
+)
+
+CREATE TABLE tblEmployee
+(
+  id SERIAL
+, name text
+)
+
+postgres=# INSERT INTO tblEmployee(name) VALUES('Ganeshda')
+postgres-# ;
+INSERT 0 1
+postgres=# SELECT *
+postgres-# FROM tblEmployee
+postgres-# ;
+ id |   name
+----+----------
+  1 | Ganeshda
+(1 row)
+
+
+postgres=# INSERT INTO tblEmployee VALUES(2, 'Shree')
+postgres-# ;
+INSERT 0 1
+postgres=# SELECT *
+postgres-# FROM tblEmployee
+postgres-# ;
+ id |   name
+----+----------
+  1 | Ganeshda
+  2 | Shree
+(2 rows)
+
+
+postgres=# INSERT INTO tblEmployee(name) VALUES('Sampath')
+postgres-# ;
+INSERT 0 1
+postgres=# SELECT *
+postgres-# FROM tblEmployee
+postgres-# ;
+ id |   name
+----+----------
+  1 | Ganeshda
+  2 | Shree
+  2 | Sampath
+(3 rows)
+
+
+postgres=# INSERT INTO tblEmployee(name) VALUES('Sai')
+postgres-# ;
+INSERT 0 1
+postgres=# SELECT *
+postgres-# FROM tblEmployee
+postgres-# ;
+ id |   name
+----+----------
+  1 | Ganeshda
+  2 | Shree
+  2 | Sampath
+  3 | Sai
+(4 rows)
+
+
+postgres=# INSERT INTO tblEmployee VALUES
+postgres-# (11, 'Paul')
+postgres-# , (22, 'Avinash')
+postgres-# , (33, 'Chinmay')
+postgres-# ;
+INSERT 0 3
+postgres=# SELECT *
+postgres-# FROM tblEmployee
+postgres-# ;
+ id |   name
+----+----------
+  1 | Ganeshda
+  2 | Shree
+  2 | Sampath
+  3 | Sai
+ 11 | Paul
+ 22 | Avinash
+ 33 | Chinmay
+(7 rows)
+
+
+postgres=# INSERT INTO tblEmployee(name) VALUES
+postgres-#  ('Dinesh Babu')
+postgres-# , ('Saikiran')
+postgres-# ;
+INSERT 0 2
+postgres=# SELECT *
+postgres-# FROM tblEmployee
+postgres-# ;
+ id |    name
+----+-------------
+  1 | Ganeshda
+  2 | Shree
+  2 | Sampath
+  3 | Sai
+ 11 | Paul
+ 22 | Avinash
+ 33 | Chinmay
+  4 | Dinesh Babu
+  5 | Saikiran
+(9 rows)
+
+
+postgres=# \d+ tblEmployee
+                                                       Table "public.tblemployee"
+ Column |  Type   | Collation | Nullable |                 Default                 | Storage  | Compression | Stats target | Description
+--------+---------+-----------+----------+-----------------------------------------+----------+-------------+--------------+-------------
+ id     | integer |           | not null | nextval('tblemployee_id_seq'::regclass) | plain    |             |              |
+ name   | text    |           |          |                                         | extended |             |              |
+Access method: heap
+
+--Creating a new table
+CREATE table testE
+(
+    ei int
+  , n varchar(50)
+)
+;
+
+--Creating a new table
+CREATE TABLE testE1
+(
+    e1 integer
+  , a1 char(5)
+)
+;
+
+--Displaying all rows and all columns of the table
+SELECT *
+FROM tblEmployee
+;
+
+--Adding new column to the table
+ALTER TABLE tblEmployee ADD COLUMN phoneNumber int
+;
+
+--Adding new column to the table
+ALTER TABLE tblEmployee ADD COLUMN salary integer
+;
+
+--Display all columns and rows of the table
+SELECT *
+FROM tblEmployee
+;
+
+--Displaying only required columns from the table [Best and recommended practice]
+SELECT name, id
+FROM tblEmployee
+;
+
+--Display rows using a numeric criteria
+SELECT id, phonenumber, name
+FROM tblEmployee
+WHERE id=22
+;
+
+--Display rows using a string criteria
+SELECT id, name, phonenumber
+FROM tblEmployee
+WHERE name = 'Avinash'
+;
+
+--Adding new column of big size integer datatype [i.e. bigint] holding huge range of whole numbers
+ALTER TABLE tblEmployee ADD COLUMN phone bigint
+;
+
+--Inserting huge 10-digit phone number records
+INSERT INTO tblEmployee(name, phone, salary) VALUES('Sai', 00919820305325, 900000)
+;
+
+--Using AND keyword clause
+SELECT name, phone, salary
+FROM tblEmployee
+WHERE id=3 AND name='Sai'
+;
+
+--Using OR keyword clause
+SELECT name, id, salary, phone
+FROM tblEmployee
+WHERE id=2 OR name='Shree'
+;
+
+--Using OR keyword clause
+SELECT name, id, salary, phone
+FROM tblEmployee
+WHERE id=75 OR name='Shree'
+;
+
+--Using OR keyword clause
+SELECT id, name, salary, phone
+FROM tblEmployee
+WHERE id=3 OR name='Salim'
+;
+
+--Sort the data using DESCending order [By default ASCending]
+SELECT name, id, phone, salary
+FROM tblEmployee
+ORDER BY id DESC
+;
+
+--User friendly alias for column names
+SELECT name as "Name", id as "Id", phone as "Phone", salary as "Salary"
+FROM tblEmployee
+ORDER BY name ASC
+;
+
+--Display only distinct-unique rows from a table using 'DISTINCT' keyword
+--Note: 'DISTINCT' is applied on the whole row, although the 'DISTINCT' keyword can be and has to be applied only to one-column
+SELECT DISTINCT name, id
+FROM tblEmployee
+;
+
+--Display only distinct-unique rows from a table using 'DISTINCT' keyword
+--Note: 'DISTINCT' is applied on the whole row, although the 'DISTINCT' keyword can be and has to be applied only to one-column
+SELECT DISTINCT name
+FROM tblEmployee
+;
+
+--Wildcards % -> any number of letters _ -> only one letter
+--Searching using wildcard characters and patterns
+--Displays all rows starting with 's'
+SELECT name, id
+FROM tblEmployee
+WHERE name LIKE 's%'
+;
+
+--Searching using wildcard characters and patterns
+--Displays all rows starting with 'S'
+SELECT name, id
+FROM tblEmployee
+WHERE name LIKE 'S%' --Note: It is always case-sensitive search else returns no-rows
+;
+
+--Searching using wildcard characters and patterns
+--Displays all rows starting with 'h'
+SELECT name, id, salary
+FROM tblEmployee
+WHERE name LIKE '%h'
+;
+
+--Wildcards % -> any number of letters _ -> only one letter
+--Searching using wildcard characters and patterns
+--Displays all rows starting with 'S', any one letter in between and ending with 'i'
+SELECT id, name, salary
+FROM tblEmployee
+WHERE name LIKE 'S_i'
+;
+
+--Wildcards % -> any number of letters _ -> only one letter [ [] -> to create patterns ^ -> Negate [Works only in In SQL-Server] ]
+--Searching using wildcard characters and patterns
+--[Works only in SQL Server] Displays all rows not starting with 'S'
+SELECT id, name, salary
+FROM tblEmployee
+WHERE name LIKE '[^S]%' --[Works only in SQL Server; Combination of % and _ can also be used together]]
+;
+
+--Creating runtime-calculated-coumn
+SELECT name, id, salary, (salary + 3000) as "One-Time-Bonus-With-Salary"
+FROM tblEmployee
+;
+
+--Conditions in SQL; CASE...END statements in SQL; Using '>' and '<'
+SELECT name, id, salary,
+  (CASE
+  WHEN (salary>699999) and (salary<800001) THEN 'Salary-Commercials'
+  WHEN (salary>800001) THEN 'High-Salary'
+  ELSE 'Daily-Contract-Commercials'
+  END) as "Salary-Ratings"
+FROM tblEmployee
+;
+
+--Conditions in SQL; CASE...END statements in SQL; Using '>=' and '<='
+SELECT name, id, salary,
+  (CASE 
+  WHEN (salary>=700000) and (salary<=800000) THEN 'Salary-Commercials'
+  WHEN (salary>800000) THEN 'High-Salary'
+  ELSE 'Daily-Contract-Commercials'
+  END) as "Salary-Ratings"
+FROM tblEmployee
+;
+
+postgres=# --List tables from a specific database
+postgres=# --\l <database_name>
+postgres=# --Default database(s) in PostgreSQL: template0, template1, postgres
+postgres=# \l postgres
+ postgres | postgres | UTF8     | English_India.1252 | English_India.1252 |
+
+--https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-tables/
+
+postgres=# --List tables from all schemas
+postgres=# --Columns: Schema, Name, Type, Owner, ...
+postgres=# \dt+ *.*
+ information_schema | sql_features            | table       | postgres | permanent   | heap          | 104 kB     |
+ information_schema | sql_implementation_info | table       | postgres | permanent   | heap          | 48 kB      |
+ information_schema | sql_parts               | table       | postgres | permanent   | heap          | 48 kB      |
+ information_schema | sql_sizing              | table       | postgres | permanent   | heap          | 48 kB      |
+ pg_catalog         | pg_aggregate            | table       | postgres | permanent   | heap          | 56 kB      |
+...
+public             | tblemployee             | table       | postgres | permanent   | heap          | 16 kB      |
+ public             | teste1                  | table       | postgres | permanent   | heap          | 0 bytes    |
+
+--Join data from two data-result-sets using UNION ALL [displays duplicate-rows also] and UNION [just displays unique rows]
+--Imp. Note: The number of columns and their data-types of the SELECT statements should be same
+SELECT name, id, salary FROM tblEmployee
+UNION ALL     --[displays duplicate-rows also]
+SELECT name, id, salary FROM tblEmployee
+;
+
+----Join data from two data-result-sets using UNION [just displays unique rows]
+--Imp. Note: The number of columns and their data-types of the SELECT statements should be same
+SELECT name, id FROM tblEmployee
+UNION     --[just displays unique rows]
+SELECT name, id FROM tblEmployee
+;
+
+
+--Adding PRIMARY KEY constraint to the existing 'tblEmployee' table after deleting duplicate rows
+DELETE FROM tblEmployee
+WHERE id=7 AND phonenumber=2147000000
+;
+ALTER TABLE tblEmployee ADD CONSTRAINT pk_id PRIMARY KEY(id)
+;
+
+--Creating table 'tblEmployeeAddress' since prerequisite to learn-study joins; Foreign Key
+CREATE TABLE tblEmployeeAddress
+(
+    addressId SERIAL --autoincrementing integer
+  , customerId integer
+  , address1 character varying(300)
+  , city varchar(30)
+  , constraint fk_customerId FOREIGN KEY(customerId) REFERENCES tblEmployee(id)
+)
+;
+
+\d+ tblEmployeeAddress
+
+--Inserting rows into Employee-Address table
+INSERT INTO tblEmployeeAddress(customerId, city, address1) VALUES
+(5, 'London', '17 Taunton Avnue, London-UK, TW3 4AG')
+, (1, 'Glasgow', 'UK-Scotland')
+, (2, 'Glasgow', 'UK-Scotland')
+, (3, 'Glasgow', 'UK-Scotland')
+, (4, 'London', '17 Taunton Avnue, London-UK, TW3 4AG')
+, (6, 'Glasgow', 'UK-Scotland')
+, (7, 'Glasgow', 'UK-Scotland')
+, (8, 'Glasgow', 'UK-Scotland')
+, (22, 'London', '17 Taunton Avnue, London-UK, TW3 4AG')
+, (33, 'Glasgow', 'UK-Scotland')
+, (11, 'Glasgow', 'UK-Scotland')
+;
+
+ALTER TABLE tblEmployeeAddress ADD CONSTRAINT pk_addressId PRIMARY KEY(addressId, customerId)
+;
+
+--https://www.postgresql.org/docs/7.2/sql-altertable.html
+--Dropping table constraint
+ALTER TABLE tblEmployeeAddress DROP CONSTRAINT pk_addressid
+;
+ALTER TABLE tblEmployeeAddress ADD CONSTRAINT pk_addressid PRIMARY KEY(addressid)
+;
+
+--https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-rename-column/
+--Rename table column
+ALTER TABLE tblEmployeeAddress RENAME COLUMN customerid TO employeeId
+;
+
+--Fetching only matching data from two tables; [Inner-join]
+--"C:\Users\Administrator\Documents\dnpNewMachine\Databases\'Structured Query Language [SQL]'\Inner join.png"
+SELECT * 
+FROM tblEmployee 
+INNER JOIN tblEmployeeAddress 
+  ON tblEmployee.id = tblEmployeeAddress.employeeId
+;
+
+--Fetching all the rows [matching + non-matching] from the left-table and 
+                                --only-matching-rows from the right-table
+                                --[Left Join]
+--"C:\Users\Administrator\Documents\dnpNewMachine\Databases\'Structured Query Language [SQL]'\Left join.png"
+SELECT *
+FROM tblEmployee LEFT JOIN tblEmployeeAddress 
+                 ON tblEmployee.id = tblEmployeeAddress.employeeId 
+;
+
+
+/*
+--References-
+
+Tech Classes [/1.07.21]
+https://www.youtube.com/watch?v=obJZ1rB7TKc Data Analysis End-to-End Project for 
+Portfolio STEP BY STEP | How to create a Data Analyst Project
+
+Questpond [Only watched: [20.50/1.20.09] Practice: 33.36 on wards]
+https://www.youtube.com/watch?v=uGlfP9o7kmY&t=315s
+Learn SQL in 1 Hour | SQL Tutorial for Beginners | SQL Tutorial Step by Step
+
+
+AmanBytes  [Watched 2/3.55]
+https://www.youtube.com/watch?v=eFoVKbSZOuI SQL Injection Attack In 3 Minutes!!!
+
+codebasics [Only watched: 9/13.11]
+https://www.youtube.com/watch?v=ECPwT9slE4s&t=81s SQL Tutorial For Beginners - 1 | MySQL Installation
+
+Mike Dane [Only watched: 7/20.52]
+https://www.youtube.com/watch?v=xmwI6VB_wUM&list=PLLAZ4kZ9dFpMGXTKXsBM_ZNpJwowfsP49 
+Introduction | SQL | Tutorial 1
+https://www.youtube.com/watch?v=_Q07-8e3UbI&list=PLLAZ4kZ9dFpMGXTKXsBM_ZNpJwowfsP49&index=2 
+What is a Database? | Let's Learn
+
+
+techTFQ [Practical: 11.05 Only watched: 15/1.10.28]
+https://www.youtube.com/watch?v=Hl4NZB1XR9c&t=1602s 
+SQL Basics Tutorial for Beginners (Practice SQL Queries)
+
+
+
+CampusX [Only watched: 10/5.42.56]
+https://www.youtube.com/watch?v=nopIGY1zJE0&t=29s 
+Complete SQL Course For Data Science | SQL For Data Science in 6 Hrs
+
+
+https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key/
+https://www.postgresql.org/download/
+https://en.wikipedia.org/wiki/PostgreSQL
+https://www.postgresql.org/docs/current/datatype.html
+
+
+
+Questpond
+https://www.youtube.com/watch?v=76CmZiwkq7U Docker and Kubernetes Online Training from scratch
+*/
