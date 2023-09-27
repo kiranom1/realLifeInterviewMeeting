@@ -424,8 +424,49 @@ FROM tblEmployee LEFT JOIN tblEmployeeAddress
 ;
 
 
+techTFQ [Practical: 11.05 Only watched: 15/1.10.28]
+https://www.youtube.com/watch?v=Hl4NZB1XR9c&t=1602s 
+SQL Basics Tutorial for Beginners (Practice SQL Queries)
+
+CREATE TABLE IF NOT EXISTS "tblSTAFF"
+(
+  "staff_id" varchar(20)
+, "staff_type" varchar(30)
+, "school_id" varchar(20)
+, "name" varchar(95)
+, "surname" varchar(95)
+, "age" integer
+, "date_of_birth" date
+, "date_of_joining" date
+, "gender" varchar(10) CHECK("gender" IN ('M', 'F', 'Male', 'Female'))
+, "address_id" varchar(20)
+, constraint pk_staff PRIMARY KEY("staff_id")
+--, constraint fk_staff_school FOREIGN KEY("school_id") REFERENCES "tblSCHOOL"("school_id")
+--, constraint fk_staff_address FOREIGN KEY("address_id") REFERENCES "tblADDRESS"("address_id")
+)
+;
+
+
 /*
---References-
+--References / Source(s) / URL(s):
+https://www.freecodecamp.org/news/a-beginners-guide-to-sql/
+The SQL Handbook – A Free Course for Web Developers
+
+https://www.freecodecamp.org/news/sql-for-web-devs/
+Mastering SQL for Web Developers – Full Course
+freeCodeCamp.org	
+https://www.youtube.com/watch?v=KBDSJU3cGkc
+SQL For Web Developers - Complete Database Course
+
+https://www.freecodecamp.org/news/learn-sql-in-10-minutes/
+
+https://www.freecodecamp.org/news/learn-the-basics-of-sql-injection-and-how-to-protect-your-web-apps/
+https://www.youtube.com/watch?v=2nXOxLpeu80
+Basics of SQL Injection - Penetration Testing for Ethical Hackers
+
+https://www.freecodecamp.org/news/sql-and-databases-full-course/
+
+https://www.freecodecamp.org/news/the-ultimate-guide-to-sql-join-statements/
 
 Tech Classes [/1.07.21]
 https://www.youtube.com/watch?v=obJZ1rB7TKc Data Analysis End-to-End Project for 
@@ -449,11 +490,9 @@ https://www.youtube.com/watch?v=_Q07-8e3UbI&list=PLLAZ4kZ9dFpMGXTKXsBM_ZNpJwowfs
 What is a Database? | Let's Learn
 
 
-techTFQ [Practical: 11.05 Only watched: 15/1.10.28]
+techTFQ [1.10.28]
 https://www.youtube.com/watch?v=Hl4NZB1XR9c&t=1602s 
 SQL Basics Tutorial for Beginners (Practice SQL Queries)
-
-
 
 CampusX [Only watched: 10/5.42.56]
 https://www.youtube.com/watch?v=nopIGY1zJE0&t=29s 
