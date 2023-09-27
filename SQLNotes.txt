@@ -449,6 +449,11 @@ CREATE TABLE IF NOT EXISTS "tblSTAFF"
 
 /*
 --References / Source(s) / URL(s):
+https://www.geeksforgeeks.org/postgresql-create-auto-increment-column-using-serial/
+
+https://chartio.com/resources/tutorials/how-to-define-an-auto-increment-primary-key-in-postgresql/#:~:text=This%20can%20be%20accomplished%20with,use%20that%20as%20our%20id%20.
+
+
 https://www.freecodecamp.org/news/a-beginners-guide-to-sql/
 The SQL Handbook – A Free Course for Web Developers
 
