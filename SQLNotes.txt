@@ -449,6 +449,9 @@ CREATE TABLE IF NOT EXISTS "tblSTAFF"
 
 /*
 --References / Source(s) / URL(s):
+
+
+
 https://www.geeksforgeeks.org/postgresql-create-auto-increment-column-using-serial/
 
 https://chartio.com/resources/tutorials/how-to-define-an-auto-increment-primary-key-in-postgresql/#:~:text=This%20can%20be%20accomplished%20with,use%20that%20as%20our%20id%20.
@@ -456,6 +459,7 @@ https://chartio.com/resources/tutorials/how-to-define-an-auto-increment-primary-
 
 https://www.freecodecamp.org/news/a-beginners-guide-to-sql/
 The SQL Handbook – A Free Course for Web Developers
+Read from: When talking about SQL databases, we also have to mention the elephant in the room: NoSQL.
 
 https://www.freecodecamp.org/news/sql-for-web-devs/
 Mastering SQL for Web Developers – Full Course
@@ -472,6 +476,11 @@ Basics of SQL Injection - Penetration Testing for Ethical Hackers
 https://www.freecodecamp.org/news/sql-and-databases-full-course/
 
 https://www.freecodecamp.org/news/the-ultimate-guide-to-sql-join-statements/
+
+
+techTFQ
+https://www.youtube.com/watch?v=ZwFfiadQB3k
+SQL Interview Query for Data Analyst [/29.50]
 
 Tech Classes [/1.07.21]
 https://www.youtube.com/watch?v=obJZ1rB7TKc Data Analysis End-to-End Project for 
