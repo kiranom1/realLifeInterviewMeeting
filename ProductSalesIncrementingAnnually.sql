@@ -23,3 +23,10 @@ INSERT INTO tblProductSalesAmount VALUES
   , ('Sheera', 594, 2023)
   ;
 
+SELECT *, 
+    (case when sales_amount < lead(sales_amount) over(partition by product_brand order by year_of_sales) 
+          then 1 
+          else 0 
+    end) as "Flag"
+FROM tblProductSalesAmount
+;
