@@ -24703,3 +24703,22 @@ INSERT INTO "tblCorrectAnswer" VALUES
 , (503, 60, 'a')
 ;
 
+DROP TABLE IF EXISTS "tblquestionPaperCode" CASCADE
+;
+CREATE TABLE IF NOT EXISTS "tblquestionPaperCode"
+(
+	  "class" integer
+	, "paper_code" integer
+	, "subject" varchar(18)
+)
+;
+
+INSERT INTO "tblquestionPaperCode" ("class", "paper_code", "subject") VALUES
+  (6, 101, 'Math')
+, (7, 102, 'Math')
+, (8, 103, 'Math')
+, (6, 501, 'Science')
+, (7, 502, 'Science')
+, (8, 503, 'Science')
+;
+	
