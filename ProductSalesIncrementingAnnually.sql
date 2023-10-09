@@ -23,10 +23,22 @@ INSERT INTO tblProductSalesAmount VALUES
   , ('Sheera', 594, 2023)
   ;
 
-SELECT *, 
-    (case when sales_amount < lead(sales_amount) over(partition by product_brand order by year_of_sales) 
-          then 1 
-          else 0 
-    end) as "Flag"
+
+with cte_tblProductSalesAmount as
+	(SELECT *, (case when sales_amount < lead(sales_amount, 1, sales_amount+1) over(partition by product_brand order by year_of_sales)
+			          /*'lead' function second parameter [i.e. offset-value, meaning that how many next records do we want to compare it 
+				   with [by default is 1]
+				   Third parameter is the default value that gets returned if there is no next record
+				   In this case, we do "sales_amount+1" so that the lead func-expression always returns TRUE
+			           [thus final output becomes always 1] because while comparison "sales_amount+1" will always be
+				   greater than "sales_amount" */
+		then 1
+		else 0
+	   end) AS "Flag"
+	FROM tblProductSalesAmount)
+SELECT *
 FROM tblProductSalesAmount
+WHERE product_brand NOT IN (SELECT product_brand
+			    FROM cte_tblProductSalesAmount
+			    WHERE "Flag"=0)	
 ;
