@@ -24391,6 +24391,7 @@ COMMIT
 ;
 */
 
+/* Solution started working out */
 SELECT ts."roll_number", ts."student_name", ts."class", ts."section", ts."school_name", 
 	   (case when tsr."option_marked" = tca."correct_answer_option"
 	   		 then 1
