@@ -269,6 +269,7 @@ COMMIT
 ; 
 */
 
+
 DROP TABLE IF EXISTS "tblStudentResponse" CASCADE
 ;
 
@@ -24389,6 +24390,17 @@ INSERT INTO "tblStudentResponse" VALUES
 COMMIT
 ;
 */
+
+SELECT ts."roll_number", ts."student_name", ts."class", ts."section", ts."school_name", 
+	   (case when tsr."option_marked" = tca."correct_answer_option"
+	   		 then 1
+			 else 0
+	    end) as Math_correct
+FROM "tblStudents" AS ts
+JOIN "tblStudentResponse" AS tsr ON tsr."roll_number" = ts."roll_number"
+JOIN "tblCorrectAnswer" AS tca ON tca."question_paper_code" = tsr."question_paper_code" AND tca."question_number" = tsr."question_number"
+WHERE ts."roll_number" = 10001
+;
 
 DROP TABLE IF EXISTS "tblCorrectAnswer" CASCADE
 ;
