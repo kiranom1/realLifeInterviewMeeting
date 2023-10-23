@@ -47,7 +47,12 @@ FROM "tblCandidates" AS "tc"
 JOIN "tblResults" AS "tr" ON "tc"."id" = "tr"."candidate_id"
 ;
 
-SELECT "tc"."party", "tr"."constituency_id", "tr"."candidate_id", "tr"."votes"
-FROM "tblCandidates" AS "tc"
-JOIN "tblResults" AS "tr" ON "tr"."candidate_id" = "tc"."id"
+WITH ce AS
+  (SELECT "tc"."party", "tr"."constituency_id", "tr"."candidate_id", "tr"."votes"
+     , rank() over(partition by  "tr"."constituency_id" order by "tr"."votes" DESC) AS "Rank"
+  FROM "tblCandidates" AS "tc"
+  JOIN "tblResults" AS "tr" ON "tr"."candidate_id" = "tc"."id")
+SELECT *
+FROM "ce"
+WHERE "Rank" = 1
 ;
